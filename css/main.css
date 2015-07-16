@@ -1,0 +1,283 @@
+@import url(fonts/clear-sans.css);
+html, body, div{
+    box-sizing: border-box;
+    color: #000;
+    font-family: "Clear Sans",​"Helvetica Neue",​Arial,​sans-serif;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+div#content{
+    margin: 0 auto;
+    width: 500px;
+    padding-top: 50px;
+}
+
+div#head{
+    display: block;
+    clear: left;
+    margin-bottom: 20px;
+}
+
+div#head div.headerItem,
+div#content div#pauseView input#RestartBtn{
+    width: 100px;
+    height: 100px;
+    float: left;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+div#head div.headerItem:nth-child(1){
+    margin-left: 20px;
+}
+
+div#head div.headerItem:nth-child(2),
+div#head div.headerItem:nth-child(3),
+div#head div.headerItem:nth-child(4){
+    margin-left: 20px;
+}
+
+div#head div.headerItem:nth-child(4){
+    float:none;
+    display: inline-block;
+}
+
+div#head div#scoreboard,
+div#head div#highscore{
+    text-align: right;
+    font-size: 25px;
+    padding-top: 20px;
+    font-weight: bolder;
+}
+
+div#head div#nextBrick{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+div#head div#startButton input,
+div#head div#startButton input.start{
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    background-image: url(../img/play.png);
+    background-repeat: no-repeat;
+    /*background-position: center center;*/
+    background-size: 100%;
+}
+
+div#head div#startButton input.pause{
+    background-image: url(../img/pause.png);
+}
+
+div#playground, div#pauseView{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 0px 0px 5px 5px;
+    width: 460px;
+    margin-left: 20px;
+    border-top: none;
+}
+
+div#playground div.grid-row{
+    clear: left;
+}
+
+div#playground div.grid-row div.grid-cell{
+    border: none;/*solid 2px gray;*/
+    height: 50px;
+    width: 50px;
+    float: left;
+    padding: 0px;
+}
+
+div#playground div.clear{
+    clear: left;
+}
+
+div#playground div.grid-cell div.item{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 40px;
+    line-height: 45px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+div#content div#pauseView{
+    height: 500px;
+    display: none;
+    border: solid 5px;
+    border-radius: 5px;
+}
+
+div#content div#pauseView div#msg{
+    width: 100%;
+    text-align: center;
+    font-size: 75px;
+    font-weight: bolder;
+    margin-top: 50px;
+}
+
+div#content div#pauseView input#RestartBtn{
+    margin-left: 175px;
+    margin-top: 75px;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+div#GameDescription{
+    width: 450px;
+    margin-left: 25px;
+    color: #000;
+}
+
+div#GameDescription span.highlight{
+    font-weight: bold;
+}
+
+div#GameDescription a{
+    font-weight: bold;
+    color: #000;
+}
+
+div#donate_div{
+    text-align: center;
+}
+
+
+
+
+div#playground, div#pauseView{
+    border-color: #2B2B2B;
+}
+
+div#playground{
+    border-color: #000;
+}
+
+div#playground div.grid-cell div.item.number.destroy,
+div#playground div.grid-cell div.item.symbol.destroy,
+div#content div#playground div.grid-cell div.item.equal.destroy{
+    background-color: #8B0000;
+}
+
+div#content div#pauseView{
+    background-color:  #8c6955;
+}
+
+div#head div#startButton input,
+div#head div#startButton input.start,
+div#head div.headerItem,
+div#content div#pauseView input#RestartBtn{
+    background-color: #bfae80;    
+}
+
+div#content div#playground div.grid-cell div.item.equal{
+    background-color: #000;
+    color: #fff;
+}
+
+div#playground div.grid-cell div.item.number{
+    background-color: #75a3d1;
+    line-height: 50px;
+}
+
+div#playground div.grid-cell div.item.symbol{
+    background-color: #d9411e;
+}
+
+body{
+    background-color: #f2edb3;
+}
+
+@media screen and (max-width: 500px) {
+    html, body, div{
+        font-size: 8px;
+    }
+    
+    div#content{
+        width: 300px;
+        padding-top: 10px;
+    }
+    
+    div#head {
+        margin-bottom: 10px;
+    }
+    
+    div#head div.headerItem,
+    div#content div#pauseView input#RestartBtn{
+        width: 50px;
+        height: 50px;
+    }
+    
+    div#playground, div#pauseView{
+        width: 280px;
+        margin-left: 10px;
+    }
+    
+    div#playground div.grid-row div.grid-cell{
+        height: 30px;
+        width: 30px;
+    }
+    
+    div#playground div.grid-cell div.item{
+        font-size: 15px;
+        line-height: 30px;
+        border-radius: 5px;
+    }
+    
+    div#content div#pauseView{
+        height: 300px;
+    }
+    
+    div#content div#pauseView div#msg{
+        font-size: 30px;
+        margin-top: 50px;
+    }
+
+    div#content div#pauseView input#RestartBtn{
+        margin-left: 110px;
+        margin-top: 40px;
+        font-size: 8px;
+    }
+    
+    div#GameDescription{
+        width: 300px;
+        margin-left: 0px;
+        color: #000;
+    }
+    
+    div#head div#scoreboard,
+    div#head div#highscore{
+        font-size: 9px;
+        padding-top: 2px;
+    }
+    
+    div#head div#startButton input,
+    div#head div#startButton input.start{
+        font-size: 5px;
+    }
+    
+    div#head div#nextBrick{
+        font-size: 15px;
+    }
+    
+    div#playground div.grid-cell div.item.number{
+        line-height: 30px;
+    }
+}

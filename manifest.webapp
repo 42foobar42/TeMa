@@ -1,0 +1,16 @@
+{
+  "name": "TeMa",
+  "version": "0.9",
+  "description": "A game with a mix of Tetris and math.",
+  "launch_path": "/index.html",
+  "icons": {
+    "512": "/img/icon-512.png",
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Alexander Boll",
+    "url": "http://42foobar42.github.io/TeMa/"
+  },
+  "default_locale": "en",
+  "type": "web"
+}

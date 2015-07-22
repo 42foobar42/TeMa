@@ -101,7 +101,7 @@ var brick = (function() {
     function getBrickByPos(x, y){
         var i;
         for(i = 0; i < bricks.length; i++){
-            if(typeof bricks[i].pos !== 'undefined'){
+            if(typeof bricks[i].pos !== 'undefined' && typeof bricks[i].active === 'undefined'){
                 if(bricks[i].pos.x === x && bricks[i].pos.y === y){
                     return bricks[i];
                 }
@@ -139,54 +139,151 @@ var brick = (function() {
         }
         return false;
     }
+    function checkOccurringInDirections(brick, amount){
+        var result = [], nbrick, x, y;
+        // West
+        x = brick.pos.x - 1;
+        y = brick.pos.y;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        //North West
+        result = [];
+        x = brick.pos.x - 1;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x--;
+            y--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //North
+        result = [];
+        x = brick.pos.x;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            y--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //North East
+        result = [];
+        x = brick.pos.x + 1;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            y--;
+            x++;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //East
+        result = [];
+        x = brick.pos.x + 1;
+        y = brick.pos.y;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x++;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        return false;
+    }
+    function getHelperBrick(){
+        var eq, equations;
+        console.log("helper brick");
+        eq = findEqual(0);
+        if(eq){
+            equations = getEquationsByPos(eq);
+            console.log(equations);
+        }
+        return 1;
+    }
     return {
         generateBrick: function(x, y) {
             var obj = {}, randomNumber, countOfBricks = statistic.equal + statistic.number + statistic.operator, amountNumber = 0, key;
             obj.pos = {};
             obj.pos.x = x;
             obj.pos.y = y;
-            for (key in numberCount) {
-                amountNumber += numberCount[key];
-            }
-            if(countOfBricks > 0 && countOfBricks % 3 === 0){
-                if((statistic.equal/countOfBricks)*100 < PERCENT_PER_ELEMENT.equal){
-                    obj.value = symbols[3].symbol;
-                    obj.cls = 'symbol';
-                    statistic.equal++;
-                } else if((statistic.operator/countOfBricks)*100 < PERCENT_PER_ELEMENT.operator){
-                    obj.value = symbols[Math.floor(Math.random() * 3)].symbol;
-                    obj.cls = 'symbol';
-                    statistic.operator++;
-                } else {
-                    obj.value = this.generateNumber(amountNumber);
-                    obj.cls = 'number';
-                }
+            if(brick.length % 7 === 0){
+                obj.value = getHelperBrick();
+                obj.cls = 'number';
+                numberCount[obj.value]++;
+                statistic.number++;
             } else {
-                if((Math.floor(Math.random() * 100)) < PERCENT_FOR_NUMBER){
-                    obj.value = this.generateNumber(amountNumber);
-                    obj.cls = 'number';
-                } else {
-                    randomNumber = Math.floor(Math.random() * 100);
-                    obj.cls = 'symbol';
-                    if(randomNumber < symbols[0].percent){
-                        obj.value = symbols[0].symbol;
+                for (key in numberCount) {
+                    amountNumber += numberCount[key];
+                }
+                if(countOfBricks > 0 && countOfBricks % 3 === 0){
+                    if((statistic.equal/countOfBricks)*100 < PERCENT_PER_ELEMENT.equal){
+                        obj.value = symbols[3].symbol;
+                        obj.cls = 'symbol';
+                        statistic.equal++;
+                    } else if((statistic.operator/countOfBricks)*100 < PERCENT_PER_ELEMENT.operator){
+                        obj.value = symbols[Math.floor(Math.random() * 3)].symbol;
+                        obj.cls = 'symbol';
                         statistic.operator++;
                     } else {
-                        if(randomNumber < symbols[1].percent){
-                            obj.value = symbols[1].symbol;
+                        obj.value = this.generateNumber(amountNumber);
+                        obj.cls = 'number';
+                    }
+                } else {
+                    if((Math.floor(Math.random() * 100)) < PERCENT_FOR_NUMBER){
+                        obj.value = this.generateNumber(amountNumber);
+                        obj.cls = 'number';
+                    } else {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        obj.cls = 'symbol';
+                        if(randomNumber < symbols[0].percent){
+                            obj.value = symbols[0].symbol;
                             statistic.operator++;
                         } else {
-                            if(randomNumber < symbols[2].percent){
-                                obj.value = symbols[2].symbol;
+                            if(randomNumber < symbols[1].percent){
+                                obj.value = symbols[1].symbol;
                                 statistic.operator++;
                             } else {
-                                obj.value = symbols[3].symbol;
-                                statistic.equal++;
+                                if(randomNumber < symbols[2].percent){
+                                    obj.value = symbols[2].symbol;
+                                    statistic.operator++;
+                                } else {
+                                    obj.value = symbols[3].symbol;
+                                    statistic.equal++;
+                                }
                             }
                         }
                     }
                 }
             }
+            //obj.value = 9;
             return obj;
         },
         getNumberByPercent: function (amount){
@@ -283,8 +380,21 @@ var brick = (function() {
             bricks = [];
             statistic = { number:0, operator:0, equal:0 };
             numberCount = { 0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0};
+        },
+        deleteOccurring: function(amount){
+            var j = 0, k = 0, brick, result;
+            for(k = Rows; k > 0; k--){
+                for(j = 0; j < Cols; j++){
+                    brick = getBrickByPos(j, k);
+                    if(brick && typeof brick.active === 'undefined'){
+                        result = checkOccurringInDirections(brick, amount);
+                        if(result){
+                            return result;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     };
 }());
-
-

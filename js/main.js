@@ -17,6 +17,7 @@ var gameButton;
 
 var playground, pausescreen, pauseMsg;
 
+
 window.onload = function () {
     var i, state;
     playground = document.getElementById('playground');
@@ -50,7 +51,7 @@ window.onunload = function () {
 
 var GameLoop = function (){
     gameLogic();
-}
+};
     
 function startGame(){
     if (GameOn === false){
@@ -91,6 +92,15 @@ function checkBricks(){
     }
 }
 
+function deleteTriples(){
+    var pos = brick.deleteOccurring(3);
+    if(pos){
+        graphics.highlightElements(pos);
+        clearInterval(GameInterval);
+        setTimeout(function() {deleteBricks(pos);}, TIME_FOR_DELETE_EFFECT);
+    }
+}
+
 var deleteBricks = function (positions){
     brick.deleteBricks(positions);
     graphics.draw(brick.getBricks());
@@ -115,6 +125,7 @@ function gameLogic(){
     }
     graphics.draw(brick.getBricks());
     checkBricks();
+    deleteTriples();
 }
 
 function Restart(){

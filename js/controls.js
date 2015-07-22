@@ -9,7 +9,7 @@ var controls = (function(win) {
         68: 'right', // D
         83: 'down', // S
         65: 'left'  // A
-      }, startX, startY, touched, CONST_PXTOSIDE = 50, CONST_PXTODOWN = 50;
+      }, startX, startY, CONST_PXTOSIDE = 50, CONST_PXTODOWN = 50, eventTouchstart, eventTouchmove, eventTouchend;
     function keyboard(){
         win.addEventListener("keydown", function (event) {            
             if(typeof map[event.keyCode] !== 'undefined'){
@@ -23,19 +23,31 @@ var controls = (function(win) {
         });
     }
     function touchpad(){
-        win.addEventListener('touchstart', function(e){
-            var touchobj = e.changedTouches[0];
-            startX = touchobj.pageX;
-            startY = touchobj.pageY;
+        win.addEventListener(eventTouchstart, function(e){
+            var touchobj;
+            if (window.navigator.msPointerEnabled) {
+                startX = e.pageX;
+                startY = e.pageY;
+            } else {
+                touchobj = e.changedTouches[0];
+                startX = touchobj.pageX;
+                startY = touchobj.pageY;
+            }
             if(e.target.tagName.toUpperCase() !== 'INPUT' && e.target.tagName.toUpperCase() !== 'P'){
                 e.preventDefault();
             }
         });
         
-        win.addEventListener('touchmove', function(e){
-            var touchobj = e.changedTouches[0];
-            var distX = touchobj.pageX - startX;
-            var distY = touchobj.pageY - startY;
+        win.addEventListener(eventTouchmove, function(e){
+            var touchobj, distX, distY;
+            if (window.navigator.msPointerEnabled) {
+                distX = e.pageX - startX;
+                distY = e.pageY - startY;
+            } else {
+                touchobj = e.changedTouches[0];
+                distX = touchobj.pageX - startX;
+                distY = touchobj.pageY - startY;
+            }
             if(GameOn){
                 if(distX >= CONST_PXTOSIDE && distY < CONST_PXTODOWN/2){
                     startX = touchobj.pageX;
@@ -55,12 +67,22 @@ var controls = (function(win) {
             }
         });
         
-        win.addEventListener('touchend', function(e){
+        win.addEventListener(eventTouchend, function(e){
             
         });
     }
     return {
         init: function(){
+            if (window.navigator.msPointerEnabled) {
+                //Internet Explorer 10 style
+                eventTouchstart = "MSPointerDown";
+                eventTouchmove = "MSPointerMove";
+                eventTouchend = "MSPointerUp";
+              } else {
+                eventTouchstart = "touchstart";
+                eventTouchmove = "touchmove";
+                eventTouchend = "touchend";
+              }
             keyboard();
             touchpad();
         }

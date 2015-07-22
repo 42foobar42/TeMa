@@ -74,15 +74,14 @@ var controls = (function(win) {
     return {
         init: function(){
             if (window.navigator.msPointerEnabled) {
-                //Internet Explorer 10 style
                 eventTouchstart = "MSPointerDown";
                 eventTouchmove = "MSPointerMove";
                 eventTouchend = "MSPointerUp";
-              } else {
+            } else {
                 eventTouchstart = "touchstart";
                 eventTouchmove = "touchmove";
                 eventTouchend = "touchend";
-              }
+            }
             keyboard();
             touchpad();
         }

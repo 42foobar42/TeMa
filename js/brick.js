@@ -139,6 +139,85 @@ var brick = (function() {
         }
         return false;
     }
+    function checkOccurringInDirections(brick, amount){
+        var result = [], nbrick, x, y;
+        // West
+        x = brick.pos.x - 1;
+        y = brick.pos.y;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        //North West
+        result = [];
+        x = brick.pos.x - 1;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x--;
+            y--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //North
+        result = [];
+        x = brick.pos.x;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            y--;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //North East
+        result = [];
+        x = brick.pos.x + 1;
+        y = brick.pos.y - 1;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            y--;
+            x++;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        //East
+        result = [];
+        x = brick.pos.x + 1;
+        y = brick.pos.y;
+        nbrick = getBrickByPos(x, y);
+        while (nbrick && nbrick.value == brick.value){
+            x++;
+            result.push(nbrick.pos);
+            nbrick = getBrickByPos(x, y);
+        }
+        if(result.length >= amount - 1){
+            result.unshift(brick.pos);
+            return result;
+        }
+        
+        return false;
+    }
     return {
         generateBrick: function(x, y) {
             var obj = {}, randomNumber, countOfBricks = statistic.equal + statistic.number + statistic.operator, amountNumber = 0, key;
@@ -187,6 +266,7 @@ var brick = (function() {
                     }
                 }
             }
+            //obj.value = 9;
             return obj;
         },
         getNumberByPercent: function (amount){
@@ -283,8 +363,21 @@ var brick = (function() {
             bricks = [];
             statistic = { number:0, operator:0, equal:0 };
             numberCount = { 0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0};
+        },
+        deleteOccurring: function(amount){
+            var j = 0, k = 0, brick, result;
+            for(k = Rows; k > 0; k--){
+                for(j = 0; j < Cols; j++){
+                    brick = getBrickByPos(j, k);
+                    if(brick && typeof brick.active === 'undefined'){
+                        result = checkOccurringInDirections(brick, amount);
+                        if(result){
+                            return result;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     };
 }());
-
-

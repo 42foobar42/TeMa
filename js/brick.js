@@ -101,7 +101,7 @@ var brick = (function() {
     function getBrickByPos(x, y){
         var i;
         for(i = 0; i < bricks.length; i++){
-            if(typeof bricks[i].pos !== 'undefined'){
+            if(typeof bricks[i].pos !== 'undefined' && typeof bricks[i].active === 'undefined'){
                 if(bricks[i].pos.x === x && bricks[i].pos.y === y){
                     return bricks[i];
                 }
@@ -218,49 +218,66 @@ var brick = (function() {
         
         return false;
     }
+    function getHelperBrick(){
+        var eq, equations;
+        console.log("helper brick");
+        eq = findEqual(0);
+        if(eq){
+            equations = getEquationsByPos(eq);
+            console.log(equations);
+        }
+        return 1;
+    }
     return {
         generateBrick: function(x, y) {
             var obj = {}, randomNumber, countOfBricks = statistic.equal + statistic.number + statistic.operator, amountNumber = 0, key;
             obj.pos = {};
             obj.pos.x = x;
             obj.pos.y = y;
-            for (key in numberCount) {
-                amountNumber += numberCount[key];
-            }
-            if(countOfBricks > 0 && countOfBricks % 3 === 0){
-                if((statistic.equal/countOfBricks)*100 < PERCENT_PER_ELEMENT.equal){
-                    obj.value = symbols[3].symbol;
-                    obj.cls = 'symbol';
-                    statistic.equal++;
-                } else if((statistic.operator/countOfBricks)*100 < PERCENT_PER_ELEMENT.operator){
-                    obj.value = symbols[Math.floor(Math.random() * 3)].symbol;
-                    obj.cls = 'symbol';
-                    statistic.operator++;
-                } else {
-                    obj.value = this.generateNumber(amountNumber);
-                    obj.cls = 'number';
-                }
+            if(brick.length % 7 === 0){
+                obj.value = getHelperBrick();
+                obj.cls = 'number';
+                numberCount[obj.value]++;
+                statistic.number++;
             } else {
-                if((Math.floor(Math.random() * 100)) < PERCENT_FOR_NUMBER){
-                    obj.value = this.generateNumber(amountNumber);
-                    obj.cls = 'number';
-                } else {
-                    randomNumber = Math.floor(Math.random() * 100);
-                    obj.cls = 'symbol';
-                    if(randomNumber < symbols[0].percent){
-                        obj.value = symbols[0].symbol;
+                for (key in numberCount) {
+                    amountNumber += numberCount[key];
+                }
+                if(countOfBricks > 0 && countOfBricks % 3 === 0){
+                    if((statistic.equal/countOfBricks)*100 < PERCENT_PER_ELEMENT.equal){
+                        obj.value = symbols[3].symbol;
+                        obj.cls = 'symbol';
+                        statistic.equal++;
+                    } else if((statistic.operator/countOfBricks)*100 < PERCENT_PER_ELEMENT.operator){
+                        obj.value = symbols[Math.floor(Math.random() * 3)].symbol;
+                        obj.cls = 'symbol';
                         statistic.operator++;
                     } else {
-                        if(randomNumber < symbols[1].percent){
-                            obj.value = symbols[1].symbol;
+                        obj.value = this.generateNumber(amountNumber);
+                        obj.cls = 'number';
+                    }
+                } else {
+                    if((Math.floor(Math.random() * 100)) < PERCENT_FOR_NUMBER){
+                        obj.value = this.generateNumber(amountNumber);
+                        obj.cls = 'number';
+                    } else {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        obj.cls = 'symbol';
+                        if(randomNumber < symbols[0].percent){
+                            obj.value = symbols[0].symbol;
                             statistic.operator++;
                         } else {
-                            if(randomNumber < symbols[2].percent){
-                                obj.value = symbols[2].symbol;
+                            if(randomNumber < symbols[1].percent){
+                                obj.value = symbols[1].symbol;
                                 statistic.operator++;
                             } else {
-                                obj.value = symbols[3].symbol;
-                                statistic.equal++;
+                                if(randomNumber < symbols[2].percent){
+                                    obj.value = symbols[2].symbol;
+                                    statistic.operator++;
+                                } else {
+                                    obj.value = symbols[3].symbol;
+                                    statistic.equal++;
+                                }
                             }
                         }
                     }

@@ -83,13 +83,14 @@ function checkBricks(){
             positions = result[0].concat(equations[0].equal).concat(result[1]);
             graphics.highlightElements(positions);
             clearInterval(GameInterval);
-            setTimeout(function() {deleteBricks(positions);}, TIME_FOR_DELETE_EFFECT);
-            return ;
+            setTimeout(function() {deleteBricks(positions, 0);}, TIME_FOR_DELETE_EFFECT);
+            return true;
         } else {
             i++;
             equations = brick.getEquation(i);
         }
     }
+    return false;
 }
 
 function deleteTriples(){
@@ -97,13 +98,20 @@ function deleteTriples(){
     if(pos){
         graphics.highlightElements(pos);
         clearInterval(GameInterval);
-        setTimeout(function() {deleteBricks(pos);}, TIME_FOR_DELETE_EFFECT);
+        setTimeout(function() {deleteBricks(pos, 1);}, TIME_FOR_DELETE_EFFECT);
+        return true;
     }
+    return false;
 }
 
-var deleteBricks = function (positions){
+var deleteBricks = function (positions, func){
     brick.deleteBricks(positions);
     graphics.draw(brick.getBricks());
+    if( func === 0){
+        while (checkBricks()){ }
+    } else {
+        while (deleteTriples()){ }
+    }
     GameInterval = setInterval(GameLoop, TIME);
 }
 
@@ -124,8 +132,9 @@ function gameLogic(){
         brick.moveActiveBrick();
     }
     graphics.draw(brick.getBricks());
-    checkBricks();
-    deleteTriples();
+    if(!checkBricks()){
+        deleteTriples();
+    }
 }
 
 function Restart(){

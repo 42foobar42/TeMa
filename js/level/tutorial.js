@@ -45,7 +45,7 @@ var tutorial_levels = {
                      {x:5, y:8, value:'&#x00D7;'}, {x:0, y:9, value:7}, {x:7, y:9, value:0}
                     ],
         nextBricks:['-', 2, '&#x00D7;'],
-        winningConditions:{score:28,bricks:0}
+        winningConditions:{score:28,bricks:99}
     }
 };
 

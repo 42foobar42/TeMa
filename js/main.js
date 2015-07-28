@@ -1,5 +1,4 @@
-var Rows = 10;
-var Cols = 9;
+var Rows = 10, Cols = 9;
 var symbols = [{symbol:'+', percent:18}, {symbol:'-', percent:36}, 
                 {symbol:'&#x00D7;', percent:54}, {symbol:'=', percent:95}, 
                 {symbol:'/', percent:100}];
@@ -14,9 +13,10 @@ var TIME_FOR_DELETE_EFFECT = 400;
 var GameOn = false;
 
 var gameButton;
+var playground, pausescreen, pauseMsg, levelMenu, startLevelScreen;
 
-var playground, pausescreen, pauseMsg;
-
+var LEVELS = [tutorial_levels];
+var endless = true, gameAlive = false;
 
 window.onload = function () {
     var i, state;
@@ -27,33 +27,50 @@ window.onload = function () {
     nextStoneBoard = document.getElementById('nextBrick');
     highscoreboard = document.getElementById('highscore');
     pauseMsg = document.getElementById('msg');
+    levelMenu = document.getElementById('level_selection');
+    startLevelScreen = document.getElementById('startLevelScreen');
     Points = 0;
     controls.init();
     highscoreboard.innerHTML = storage.getHighscore();
     state = storage.loadGameState();
-    if(state[0] && state[2]){
+    levelController.printLevelMenu();
+    if(state[6]){
+        pauseMsg.innerHTML = 'Pause';
         for(i = 0; i < state[0].length; i++){
             brick.addBrick(state[0][i]);
         }
         Points = state[1];
         nextStone = state[2];
-        nextStoneBoard.innerHTML = nextStone.value;
+        if(nextStone){
+            nextStoneBoard.innerHTML = nextStone.value;
+        }
         scoreBoard.innerHTML = Points;
         GameOn = true;
         graphics.draw(brick.getBricks());
-        startGame();
+        if(state[4]){
+            startGame();
+        }else{
+            levelController.continueLevel(state[5]);
+        }
+    } else {
+        pauseMsg.innerHTML = 'Menu';
     }
 };
 
 window.onunload = function () {
-    storage.saveGameState(brick.getBricks(), Points, nextStone);
+    storage.saveGameState(brick.getBricks(), Points, nextStone, GameOn, endless, levelController.getStageAndLevel(),gameAlive);
 };
 
 var GameLoop = function (){
     gameLogic();
-};
-    
+};  
+
+
+
 function startGame(){
+    gameAlive = true;
+    endless = true;
+    pauseMsg.innerHTML = 'Pause';
     if (GameOn === false){
         GameOn = true;
         gameButton.className = gameButton.className.replace('play', '');
@@ -67,12 +84,11 @@ function startGame(){
         gameButton.className = 'play';
         playground.style.display = 'none';
         pausescreen.style.display = 'inherit';
-        pauseMsg.innerHTML = 'Pause';
         clearInterval(GameInterval);
     }
 }
 
-function checkBricks(){
+function checkBricks(loop){
     var i = 0, points, result, equations = brick.getEquation(i), positions;
     while(equations){
         points = equationSolver.resolve(equations);
@@ -83,7 +99,7 @@ function checkBricks(){
             positions = result[0].concat(equations[0].equal).concat(result[1]);
             graphics.highlightElements(positions);
             clearInterval(GameInterval);
-            setTimeout(function() {deleteBricks(positions, 0);}, TIME_FOR_DELETE_EFFECT);
+            setTimeout(function() {deleteBricks(positions, 0, loop);}, TIME_FOR_DELETE_EFFECT);
             return true;
         } else {
             i++;
@@ -93,26 +109,26 @@ function checkBricks(){
     return false;
 }
 
-function deleteTriples(){
+function deleteTriples(loop){
     var pos = brick.deleteOccurring(3);
     if(pos){
         graphics.highlightElements(pos);
         clearInterval(GameInterval);
-        setTimeout(function() {deleteBricks(pos, 1);}, TIME_FOR_DELETE_EFFECT);
+        setTimeout(function() {deleteBricks(pos, 1, loop);}, TIME_FOR_DELETE_EFFECT);
         return true;
     }
     return false;
 }
 
-var deleteBricks = function (positions, func){
+var deleteBricks = function (positions, func, loop){
     brick.deleteBricks(positions);
     graphics.draw(brick.getBricks());
     if( func === 0){
-        while (checkBricks()){ }
+        while (checkBricks(loop)){ }
     } else {
         while (deleteTriples()){ }
     }
-    GameInterval = setInterval(GameLoop, TIME);
+    GameInterval = setInterval(loop, TIME);
 }
 
 
@@ -132,8 +148,8 @@ function gameLogic(){
         brick.moveActiveBrick();
     }
     graphics.draw(brick.getBricks());
-    if(!checkBricks()){
-        deleteTriples();
+    if(!checkBricks(GameLoop)){
+        deleteTriples(GameLoop);
     }
 }
 
@@ -158,4 +174,5 @@ function endGame(){
     pauseMsg.innerHTML = 'Game Over';
     playground.style.display = 'none';
     pausescreen.style.display = 'inherit';
+    gameAlive = false;
 }

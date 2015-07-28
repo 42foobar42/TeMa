@@ -73,7 +73,6 @@ div#head div#startButton input.start{
     font-size: 50px;
     background-image: url(../img/play.png);
     background-repeat: no-repeat;
-    /*background-position: center center;*/
     background-size: 100%;
 }
 
@@ -81,7 +80,7 @@ div#head div#startButton input.pause{
     background-image: url(../img/pause.png);
 }
 
-div#playground, div#pauseView{
+div#playground, div#pauseView, div#startLevelScreen{
     border-style: solid;
     border-width: 5px;
     border-radius: 0px 0px 5px 5px;
@@ -95,7 +94,7 @@ div#playground div.grid-row{
 }
 
 div#playground div.grid-row div.grid-cell{
-    border: none;/*solid 2px gray;*/
+    border: none;
     height: 50px;
     width: 50px;
     float: left;
@@ -118,7 +117,7 @@ div#playground div.grid-cell div.item{
     border-radius: 5px;
 }
 
-div#content div#pauseView{
+div#content div#pauseView, div#startLevelScreen{
     height: 500px;
     display: none;
     border: solid 5px;
@@ -128,9 +127,82 @@ div#content div#pauseView{
 div#content div#pauseView div#msg{
     width: 100%;
     text-align: center;
-    font-size: 75px;
+    font-size: 40px;
     font-weight: bolder;
     margin-top: 50px;
+}
+
+div#content div#level_selection h3{
+    font-size: 25px;
+    margin: 0px;
+}
+
+div#content div#level_selection input{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-color: #bfae80;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    border: none;
+    font-weight: bolder;
+}
+
+div#content div#level_selection input.passed{
+    color: #008000;
+}
+
+div#startLevelScreen div.leveldesc {
+    text-align: center;
+    padding: 5px;
+}
+div#startLevelScreen div.buttons{
+    text-align: center;
+    margin-top: 25px;
+}
+div#startLevelScreen input.levelButton{
+    width: 100px;
+    height: 25px;
+    background-color: #bfae80;
+    border: none;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+div#startLevelScreen div.images{
+    width: 250px;
+    padding-top: 10px;
+    height: 300px;
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+div#startLevelScreen div.images img{
+    max-width:100%;
+    max-height:100%;
+}
+
+div#startLevelScreen div.images img.hidden{
+    display: none;
+}
+
+div#startLevelScreen div.images div.imageButWrap{
+    position: absolute;
+    top: 350px;
+}
+
+div#startLevelScreen div.images div.imageButWrap.right{
+    margin-left: 225px;
+}
+
+div#startLevelScreen div.images input.imageBut{
+    font-size: 20px;
+    border:none;
+    background-color: transparent;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
 }
 
 div#content div#pauseView input#RestartBtn{
@@ -159,7 +231,13 @@ div#donate_div{
     text-align: center;
 }
 
+div#level_selection div.stage {
+    text-align: center;
+}
 
+div#startLevelScreen{
+    display: none;
+}
 
 
 div#playground, div#pauseView{
@@ -176,7 +254,7 @@ div#content div#playground div.grid-cell div.item.equal.destroy{
     background-color: #8B0000;
 }
 
-div#content div#pauseView{
+div#content div#pauseView, div#startLevelScreen{
     background-color:  #8c6955;
 }
 
@@ -225,7 +303,7 @@ body{
         height: 50px;
     }
     
-    div#playground, div#pauseView{
+    div#playground, div#pauseView, div#startLevelScreen{
         width: 280px;
         margin-left: 10px;
     }
@@ -241,19 +319,49 @@ body{
         border-radius: 5px;
     }
     
-    div#content div#pauseView{
+    div#content div#pauseView, div#startLevelScreen{
         height: 300px;
     }
     
     div#content div#pauseView div#msg{
-        font-size: 30px;
-        margin-top: 50px;
+        font-size: 20px;
+        margin-top: 25px;
+    }
+    
+    div#content div#level_selection h3{
+        font-size: 15px;
+    }
+    
+    div#content div#level_selection input{
+        width: 15px;
+        height: 15px;
+        font-size: 8px;
     }
 
+    div#startLevelScreen div.images{
+        margin-left: 10px;
+        height: 200px;
+        text-align: center;
+    }
+    
+    div#startLevelScreen div.images div.imageButWrap{
+        top:225px;
+    }
+    
+    div#startLevelScreen div.buttons{
+        margin-top: 15px;
+    }
+    
+    div#startLevelScreen input.levelButton{
+        width: 70px;
+        height: 15px;
+        font-size: 10px;
+    }
+    
     div#content div#pauseView input#RestartBtn{
         margin-left: 110px;
         margin-top: 40px;
-        font-size: 8px;
+        font-size: 6px;
     }
     
     div#GameDescription{

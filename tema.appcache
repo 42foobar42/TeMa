@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2015-07-22 v1.1.0
+# 2015-07-22 v1.2.0
 index.html
 favicon.ico
 css/main.css
@@ -22,6 +22,17 @@ js/equationSolver.js
 js/graphics.js
 js/main.js
 js/storage.js
+js/levels.js
+js/level/tutorial.js
+js/level/tutorial/tut1.png
+js/level/tutorial/tut2.png
+js/level/tutorial/tut3_1.png
+js/level/tutorial/tut3_2.png
+js/level/tutorial/tut4_1.png
+js/level/tutorial/tut4_2.png
+js/level/tutorial/tut5_1.png
+js/level/tutorial/tut5_2.png
+js/level/tutorial/tut5_3.png
 
 NETWORK:
 *

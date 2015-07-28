@@ -17,6 +17,8 @@
         <link rel="shortcut icon" href="favicon.ico">
         <link href="css/main.css" rel="stylesheet" type="text/css">
         
+        <script src="js/level/tutorial.js"></script>
+        
         <script src="js/lib/math.js"></script>
         <script src="js/main.js"></script>
         <script src="js/brick.js"></script>
@@ -24,6 +26,8 @@
         <script src="js/equationSolver.js"></script>
         <script src="js/controls.js"></script>
         <script src="js/storage.js"></script>
+        <script src="js/levels.js"></script>
+        
     </head>
     <body>
         <div id="content">
@@ -159,7 +163,13 @@
             </div>
             <div id="pauseView">
                 <div id="msg"></div>
-                <input id="RestartBtn" type="button" value="New Game" onclick="Restart();"/>
+                <div id="level_selection">
+                    
+                </div>
+                <input id="RestartBtn" type="button" value="New endless &#x00A; Game" onclick="Restart();"/>
+            </div>
+            <div id="startLevelScreen">
+                
             </div>
             <div id="GameDescription">
                 <p><span class="highlight">How to play:</span> This game is similar to <span class="highlight">Tetris</span>. 

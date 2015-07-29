@@ -124,9 +124,9 @@ var deleteBricks = function (positions, func, loop){
     brick.deleteBricks(positions);
     graphics.draw(brick.getBricks());
     if( func === 0){
-        while (checkBricks(loop)){ }
+        checkBricks(loop);
     } else {
-        while (deleteTriples()){ }
+        deleteTriples(loop);
     }
     GameInterval = setInterval(loop, TIME);
 }

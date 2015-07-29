@@ -407,6 +407,10 @@ div#symbolPanel input.brickValues{
     margin-right: 7.5px;
 }
 
+div#symbolPanel input.brickValues.selected{
+    border-color: aqua;
+}
+
 div#symbolPanel input.brickValues.number{
     background-color: #75a3d1;
 }
@@ -418,4 +422,34 @@ div#symbolPanel input.brickValues.symbol{
 div#symbolPanel input.brickValues.symbol.equal{
     background-color: #000;
     color: #fff;
+}
+
+input#Plane{
+    width: 100px;
+    height: 50px;
+    background-color: #bfae80;
+    float: left;
+    border: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 15px;
+    position: absolute;
+    top: 550px;
+    left: 900px;
+}
+
+div.upcommingElement{
+    display: inline-block;
+    border: solid 2px black;
+    width: 20px;
+    text-align: center;
+}
+
+div.wrapUpcomming,
+div.wrapUpcomming div{
+    display: inline-block;
+    
+}
+div.wrapUpcomming{
+    margin-right: 10px;
 }

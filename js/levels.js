@@ -49,9 +49,11 @@ var levelController = (function(win) {
             
             reset();
             stage = LEVELS[levelIDS[0]];
+            console.log(stage);
             stageID = levelIDS[0];
             levelID = stage.levels[levelIDS[1]];
             level = stage[levelID];
+            console.log(level);
             for(d = 0; d < level.startBricks.length; d++){
                 brickData = level.startBricks[d];
                 localBrick = brick.generateBrick(brickData.x, brickData.y);

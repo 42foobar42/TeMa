@@ -20,6 +20,7 @@
         <script src="js/level/tutorial.js"></script>
         
         <script src="js/lib/math.js"></script>
+        <script src="js/lib/jquery-1.11.3.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/brick.js"></script>
         <script src="js/graphics.js"></script>
@@ -27,13 +28,14 @@
         <script src="js/controls.js"></script>
         <script src="js/storage.js"></script>
         <script src="js/levels.js"></script>
+        <script src="js/levelCreation.js"></script>
         
     </head>
     <body>
         <div id="levelPropertis">
             <div id="wrapdesc">
                 <p>Level Description:</p>
-                <textarea id="desc" cols="50" rows="5"></textarea>
+                <textarea id="levelDesc" cols="50" rows="5"></textarea>
             </div>
             <div id="symbolPanel">
                 <p>Bricks</p>
@@ -50,7 +52,7 @@
                 <input class="brickValues symbol equal" type="button" value="=">
                 <input class="brickValues symbol" type="button" value="+">
                 <input class="brickValues symbol" type="button" value="-">
-                <input class="brickValues symbol" type="button" value="&#x00D7;">
+                <input class="brickValues symbol" type="button" value="*">
             </div>
             <div id="brickwrap">
                 <p>Upcomming Bricks:</p>
@@ -65,6 +67,14 @@
                 <p>Winning conditions</p>
                 <p>Score: <input type="number" value="0" id="scorCondition"></p>
                 <p>Amount bricks left: <input type="number" value="0" id="brickCondition"></p>
+            </div>
+            <div id="exportWrap">
+                <p>
+                    <input type="button" value="export" id="exportBut">
+                </p>
+                <textarea cols="20" rows="5" id="exportString">
+                    
+                </textarea>
             </div>
         </div>
         <div id="content">
@@ -204,6 +214,7 @@
                     
                 </div>
                 <input id="RestartBtn" type="button" value="New endless &#x00A; Game" onclick="Restart();"/>
+                <input id="Plane" type="button" value="Plane"/>
             </div>
             <div id="startLevelScreen">
                 

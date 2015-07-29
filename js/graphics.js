@@ -9,7 +9,6 @@ var graphics = (function() {
                 var item = elements[index];
                 if(typeof item.pos !== 'undefined'){
                     var cell = item.pos.y * Cols + item.pos.x;
-                    //console.log(cell);
                     var cls = item.cls;
                     if(item.value === symbols[3].symbol){
                         cls += ' equal';

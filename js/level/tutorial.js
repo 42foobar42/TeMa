@@ -60,8 +60,7 @@ var tutorial_levels = {
                     {"x":0,"y":9,"value":"1"},{"x":4,"y":8,"value":"="},
                     {"x":5,"y":8,"value":"3"}],
         nextBricks:[0,0,9],
-        winningConditions:{score:49, bricks:99}}
-
-
+        winningConditions:{score:49, bricks:99}
+    }
 };
 

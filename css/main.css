@@ -389,3 +389,33 @@ body{
         line-height: 30px;
     }
 }
+
+div#levelPropertis{
+    width: 300px;
+    position: absolute;
+}
+
+div#symbolPanel input.brickValues{
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 900;
+    border-width: 5px;
+    border-color: black;
+    margin-top: 15px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+}
+
+div#symbolPanel input.brickValues.number{
+    background-color: #75a3d1;
+}
+
+div#symbolPanel input.brickValues.symbol{
+    background-color: #d9411e;  
+}
+
+div#symbolPanel input.brickValues.symbol.equal{
+    background-color: #000;
+    color: #fff;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="tema.appcache">
+<html>
     <head>
         <title>TeMa</title>
         
@@ -30,6 +30,43 @@
         
     </head>
     <body>
+        <div id="levelPropertis">
+            <div id="wrapdesc">
+                <p>Level Description:</p>
+                <textarea id="desc" cols="50" rows="5"></textarea>
+            </div>
+            <div id="symbolPanel">
+                <p>Bricks</p>
+                <input class="brickValues number" type="button" value="0">
+                <input class="brickValues number" type="button" value="1">
+                <input class="brickValues number" type="button" value="2">
+                <input class="brickValues number" type="button" value="3">
+                <input class="brickValues number" type="button" value="4">
+                <input class="brickValues number" type="button" value="5">
+                <input class="brickValues number" type="button" value="6">
+                <input class="brickValues number" type="button" value="7">
+                <input class="brickValues number" type="button" value="8">
+                <input class="brickValues number" type="button" value="9">
+                <input class="brickValues symbol equal" type="button" value="=">
+                <input class="brickValues symbol" type="button" value="+">
+                <input class="brickValues symbol" type="button" value="-">
+                <input class="brickValues symbol" type="button" value="&#x00D7;">
+            </div>
+            <div id="brickwrap">
+                <p>Upcomming Bricks:</p>
+                <div id="brickLine">
+                    
+                </div>
+                <p>
+                    <input type="button" value="add" id="addUpcomingBut">
+                </p>
+            </div>
+            <div id="wrapConditions">
+                <p>Winning conditions</p>
+                <p>Score: <input type="number" value="0" id="scorCondition"></p>
+                <p>Amount bricks left: <input type="number" value="0" id="brickCondition"></p>
+            </div>
+        </div>
         <div id="content">
             <div id="head">
                 <div class="headerItem" id="startButton">

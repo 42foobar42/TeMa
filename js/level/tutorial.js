@@ -1,6 +1,6 @@
 var tutorial_levels = {
     title:'Tutorial Levels',
-    levels:[1, 2, 3, 4, 5],
+    levels:[1, 2, 3, 4, 5, 6],
     1:{
         startScreen:'This tutorial will explain to you the basics of the game. The goal of the game is to create equations that arise on both sides the same and thus earn points. In this level you have one brick to solve the equation correctly. Use the arrow keys to put the brick on the right position.',
         img:['tutorial/tut1.png'],
@@ -46,6 +46,21 @@ var tutorial_levels = {
                     ],
         nextBricks:['-', 2, '&#x00D7;'],
         winningConditions:{score:28,bricks:99}
+    },
+    6:{
+        startScreen:"Zero gets a special meaning in this game. It can be used not only as pre-decimal, but also as leading zero. Try to reach 49 points in this level.",
+        img:['tutorial/tut6_1.png', 'tutorial/tut6_2.png', 'tutorial/tut6_3.png'],
+        startBricks:[{"x":7,"y":9,"value":"4"},{"x":6,"y":9,"value":"="},
+                    {"x":5,"y":9,"value":"8"},{"x":4,"y":9,"value":"&#x00D7;"},
+                    {"x":3,"y":9,"value":"5"},{"x":2,"y":9,"value":"6"},
+                    {"x":2,"y":8,"value":"+"},{"x":2,"y":7,"value":"3"},
+                    {"x":2,"y":6,"value":"="},{"x":1,"y":9,"value":"7"},
+                    {"x":1,"y":8,"value":"-"},{"x":1,"y":7,"value":"2"},
+                    {"x":3,"y":8,"value":"6"},{"x":3,"y":7,"value":"+"},
+                    {"x":0,"y":9,"value":"1"},{"x":4,"y":8,"value":"="},
+                    {"x":5,"y":8,"value":"3"}],
+        nextBricks:[0,0,9],
+        winningConditions:{score:49, bricks:99}
     }
 };
 

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2015-07-28 v1.2.3
+# 2015-07-29 v1.2.5
 index.html
 favicon.ico
 css/main.css
@@ -33,6 +33,9 @@ js/level/tutorial/tut4_2.png
 js/level/tutorial/tut5_1.png
 js/level/tutorial/tut5_2.png
 js/level/tutorial/tut5_3.png
+js/level/tutorial/tut6_1.png
+js/level/tutorial/tut6_2.png
+js/level/tutorial/tut6_3.png
 
 NETWORK:
 *

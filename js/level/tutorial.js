@@ -1,6 +1,6 @@
 var tutorial_levels = {
     title:'Tutorial Levels',
-    levels:[1, 2, 3, 4, 5, 6],
+    levels:[1, 2, 3, 4, 5, 6, 7],
     1:{
         startScreen:'This tutorial will explain to you the basics of the game. The goal of the game is to create equations that arise on both sides the same and thus earn points. In this level you have one brick to solve the equation correctly. Use the arrow keys to put the brick on the right position.',
         img:['tutorial/tut1.png'],
@@ -61,6 +61,13 @@ var tutorial_levels = {
                     {"x":5,"y":8,"value":"3"}],
         nextBricks:[0,0,9],
         winningConditions:{score:49, bricks:99}
+    },
+    7:{
+        "startScreen":"A further important point is, that plus and minus are recognized as a leading sign. This means that if a correct equation is found, also the leading signs will be deleted.",
+        img:['tutorial/tut7_1.png', 'tutorial/tut7_2.png', 'tutorial/tut7_3.png', 'tutorial/tut7_4.png'],
+        "startBricks":[{"x":3,"y":9,"value":"6"},{"x":3,"y":8,"value":"+"},{"x":3,"y":7,"value":"9"},{"x":3,"y":6,"value":"="},{"x":3,"y":5,"value":"1"},{"x":4,"y":9,"value":"&#x00D7;"},{"x":5,"y":9,"value":"3"},{"x":6,"y":9,"value":"="},{"x":7,"y":9,"value":"1"},{"x":8,"y":9,"value":"7"},{"x":4,"y":8,"value":"3"},{"x":5,"y":8,"value":"="},{"x":2,"y":9,"value":"+"},{"x":1,"y":9,"value":"7"},{"x":2,"y":8,"value":"2"}],
+        "nextBricks":["5","6","+","5"],
+        "winningConditions":{"score":20,"bricks":99}
     }
 };
 
